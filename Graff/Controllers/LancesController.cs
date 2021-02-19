@@ -20,7 +20,7 @@ namespace Graff.Controllers
             _context = context;
         }
 
-        // GET: Lances
+        // GET: Lances/Index
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Lance.Include(l => l.Pessoa);
@@ -29,7 +29,7 @@ namespace Graff.Controllers
             return View(lances);
         }
 
-        // GET: Lances/Details/5
+        // GET: Lances/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -66,11 +66,9 @@ namespace Graff.Controllers
         }
 
         // POST: Lances/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( IFormCollection keys)//[Bind("Valor,ProdutoId,PessoaNome")] Lance lance)
+        public async Task<IActionResult> Create( IFormCollection keys)
         {
             float valor = float.Parse(keys["Valor"].ToString());
             int produtoId = int.Parse(keys["ProdutoId"].ToString());
@@ -95,7 +93,6 @@ namespace Graff.Controllers
                     break;
                 }
             }
-
 
             //Pegando lances do produto.
             DbSet<Lance> rows = _context.Set<Lance>();
@@ -125,7 +122,7 @@ namespace Graff.Controllers
             return View(lance);
         }
 
-        // GET: Lances/Edit/5
+        // GET: Lances/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -143,9 +140,7 @@ namespace Graff.Controllers
             return View(lance);
         }
 
-        // POST: Lances/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Lances/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Valor,PessoaId")] Lance lance)
@@ -181,7 +176,7 @@ namespace Graff.Controllers
             return View(lance);
         }
 
-        // GET: Lances/Delete/5
+        // GET: Lances/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -200,7 +195,7 @@ namespace Graff.Controllers
             return View(lance);
         }
 
-        // POST: Lances/Delete/5
+        // POST: Lances/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
