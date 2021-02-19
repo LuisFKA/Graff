@@ -1,0 +1,78 @@
+﻿@model Graff.Models.Produto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Produto</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+    </dl>
+</div>
+<h4>Lances</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ShowFilterResults">
+            <div class="form-group">
+                <label for="filtro" class="control-label">Filtro</label>
+                <input name="filtro" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Filtrar" class="btn btn-primary" />
+            </div>
+            @Html.HiddenFor(Model => Model.Id)
+        </form>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Valor
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Lances != null) foreach (var lance in Model.Lances)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => lance.Pessoa.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => lance.Valor)
+                    </td>
+                    <!--
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@lance.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@lance.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@lance.Id">Delete</a>
+                    </td>
+                    -->
+                </tr>
+            }
+    </tbody>
+</table>
+<div>
+    <!--<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |-->
+    <a asp-action="Index">Voltar a lista</a>
+</div>
